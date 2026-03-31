@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SKU Information</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="font-family: Arial; padding: 20px;">
+  <h2>SKU Information</h2>
+  <p><strong>SKU ID:</strong> <span id="sku"></span></p>
+  <p><strong>Quantity:</strong> <span id="qty"></span></p>
+
+  <script>
+    const p = new URLSearchParams(window.location.search);
+    document.getElementById("sku").textContent = p.get("sku");
+    document.getElementById("qty").textContent = p.get("qty");
+  </script>
+</body>
+</html>
