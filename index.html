@@ -23,17 +23,12 @@
       border-bottom: 1px solid #e0e0e0;
     }
 
-    .logos img {
-      height: 42px;            /* same visual size as before */
+    .logos img,
+    .gxo-logo img {
+      height: 42px;
       width: auto;
       display: block;
       background: transparent;
-    }
-
-    .gxo-logo img {
-      height: 42px;            /* matches Castore / previous GXO text height */
-      width: auto;
-      display: block;
     }
 
     /* CONTENT */
@@ -94,7 +89,7 @@
     <div class="gxo-logo">
       <img
         src="https://gxo.com/wp-content/uploads/2021/07/GXO_tagline_rgb_DigitalUse.png"
-        alt="GXO Logistics">
+        alt="GXO Logo">
     </div>
   </div>
 
@@ -131,96 +126,6 @@
           <td class="sku-col">${sku}</td>
           <td class="qty-col">${qty}</td>
         `;
-        document.getElementById("tableBody").appendChild(tr);
-      });
-    }
-  </script>
-
-</body>
-</html>
-    th {
-      background-color: #2b2b2b;
-      color: white;
-      padding: 12px;
-      text-align: left;
-      font-size: 15px;
-    }
-
-    td {
-      padding: 14px 12px;
-      border-bottom: 1px solid #e0e0e0;
-      font-size: 16px;
-    }
-
-    tr:last-child td {
-      border-bottom: none;
-    }
-
-    .sku-col {
-      font-weight: bold;
-      color: #555;
-      width: 70%;
-    }
-
-    .qty-col {
-      width: 30%;
-      text-align: right;
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- HEADER -->
-  <div class="header">
-    <div class="logos">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/en/a/ad/Castore_brand_logo.svg"
-        alt="Castore Logo">
-    </div>
-
-    <div class="gxo-text">
-      <div class="title">GXO</div>
-      <div class="subtitle">Logistics at full potential</div>
-    </div>
-  </div>
-
-  <!-- TABLE -->
-  <div class="container">
-    <table>
-      <thead>
-        <tr>
-          <th>SKU ID</th>
-          <th>Quantity</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody">
-        <!-- rows injected by JS -->
-      </tbody>
-    </table>
-  </div>
-
-  <!-- SCRIPT -->
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const rawData = params.get("data");
-
-    if (rawData) {
-      const rows = rawData.split("\n");
-
-      rows.forEach(row => {
-        if (!row.trim()) return;
-
-        const parts = row.split("\t");
-        const sku = parts[0] || "-";
-        const qty = parts[1] || "-";
-
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td class="sku-col">${sku}</td>
-          <td class="qty-col">${qty}</td>
-        `;
-
         document.getElementById("tableBody").appendChild(tr);
       });
     }
