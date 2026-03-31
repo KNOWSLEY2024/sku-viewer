@@ -80,10 +80,15 @@
       border-bottom: none;
     }
 
-    .label {
+    .sku-col {
       font-weight: bold;
       color: #555;
-      width: 40%;
+      width: 70%;
+    }
+
+    .qty-col {
+      width: 30%;
+      text-align: right;
     }
   </style>
 </head>
@@ -98,34 +103,52 @@
         alt="Castore Logo">
     </div>
 
-    <div class="gxo-text">
-      <div class="title">GXO</div>
-      <div class="subtitle">Logistics at full potential</div>
+   <div class="header">
+    <div class="logos">
+      <img
+        src="https://gxo.com/wp-content/uploads/2021/07/GXO_tagline_rgb_DigitalUse.png"
+        alt="GXO Logo">
     </div>
-  </div>
 
   <!-- TABLE -->
   <div class="container">
     <table>
-      <tr>
-        <th colspan="2">SKU Details</th>
-      </tr>
-      <tr>
-        <td class="label">SKU ID</td>
-        <td id="sku"></td>
-      </tr>
-      <tr>
-        <td class="label">Quantity</td>
-        <td id="qty"></td>
-      </tr>
+      <thead>
+        <tr>
+          <th>SKU ID</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <!-- rows injected by JS -->
+      </tbody>
     </table>
   </div>
 
   <!-- SCRIPT -->
   <script>
     const params = new URLSearchParams(window.location.search);
-    document.getElementById("sku").textContent = params.get("sku") || "-";
-    document.getElementById("qty").textContent = params.get("qty") || "-";
+    const rawData = params.get("data");
+
+    if (rawData) {
+      const rows = rawData.split("\n");
+
+      rows.forEach(row => {
+        if (!row.trim()) return;
+
+        const parts = row.split("\t");
+        const sku = parts[0] || "-";
+        const qty = parts[1] || "-";
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td class="sku-col">${sku}</td>
+          <td class="qty-col">${qty}</td>
+        `;
+
+        document.getElementById("tableBody").appendChild(tr);
+      });
+    }
   </script>
 
 </body>
